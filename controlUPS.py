@@ -1,5 +1,5 @@
 """
-Description: This script provides classes for control of the UPS USB device using NUT UPS on linux system.
+Description: This script provides classes for controlling a UPS USB device using NUT UPS on a linux system.
 
 Author: Adrian Rabadan Ortiz
 
@@ -94,7 +94,7 @@ class UPSManager:
         command = f"upscmd -l {self.ups_name}"
         return self._run_command(command)
 
-    def get_voltage(self):
+    def get_input_voltage(self):
         """
         Retrieves the input voltage of the UPS device.
 
@@ -102,6 +102,16 @@ class UPSManager:
             str: The input voltage of the UPS device.
         """
         command = f"upsc {self.ups_name}@localhost input.voltage"
+        return self._run_command(command)
+    
+    def get_output_voltage(self):
+        """
+        Retrieves the output voltage of the UPS device.
+
+        Returns:
+            str: The output voltage of the UPS device.
+        """
+        command = f"upsc {self.ups_name}@localhost output.voltage"
         return self._run_command(command)
 
     def get_frequency(self):
@@ -122,6 +132,16 @@ class UPSManager:
             str: The battery charge level of the UPS device.
         """
         command = f"upsc {self.ups_name}@localhost battery.charge"
+        return self._run_command(command)
+    
+    def get_battery_voltage(self):
+        """
+        Retrieves the battery volge level of the UPS device.
+
+        Returns:
+            str: The battery voltage level of the UPS device.
+        """
+        command = f"upsc {self.ups_name}@localhost battery.voltage"
         return self._run_command(command)
 
     def get_battery_runtime(self):
